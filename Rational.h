@@ -9,6 +9,7 @@ public:
 	int getDen();
 	Rational getInverse();
 	void reduce();
+	bool isZero();
 	Rational& operator=(const Rational& rat);
 	Rational& operator+=(const Rational& rat);
 	Rational& operator-=(const Rational& rat);

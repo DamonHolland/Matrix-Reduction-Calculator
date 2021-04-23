@@ -7,7 +7,7 @@ class Matrix
 		void addVector(Vector vector);
 		void print(std::ostream& out);
 		void reduce(std::ostream& out);
-		void subtractRow(int row1, int row2, int mult, std::ostream& out);
+		void subtractRow(int rRow, int pRow, Rational inv, std::ostream& out);
 
 	private:
 		void simplifyRow(int row, std::ostream&);

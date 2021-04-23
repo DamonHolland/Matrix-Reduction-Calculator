@@ -49,7 +49,7 @@ int Rational::getDen() { return mDenominator; }
 void Rational::reduce() {
 	int i = 1, GCD = 1;
 
-	while (i <= mNumerator || i <= mDenominator){
+	while (i <= abs(mNumerator) || i <= abs(mDenominator)){
 		if (mNumerator % i == 0 && mDenominator % i == 0) {
 			GCD = i;
 		}
@@ -64,6 +64,19 @@ void Rational::reduce() {
 		mNumerator = 0 - mNumerator;
 	}
 
+}
+
+//***************************************************************************
+//Function:    isZero
+//
+//Description: Returns if the value of the rational is 0
+//
+//Parameters:	 None
+//
+//Returned:    bool - if the rational is equal to 0
+//***************************************************************************
+bool Rational::isZero() {
+	return (mNumerator == 0 || mDenominator == 0);
 }
 
 //***************************************************************************

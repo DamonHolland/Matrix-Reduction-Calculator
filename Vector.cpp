@@ -83,7 +83,7 @@ Rational Vector::simplify() {
 
 	if (pivotIndex != -1){
 		for (int i = pivotIndex; i < (int)mvElements.size(); i++) {
-			mvElements.at(i) = mvElements.at(i) * cInverse;
+			mvElements.at(i) *= cInverse;
 		}
 	}
 
