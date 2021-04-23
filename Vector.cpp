@@ -34,6 +34,32 @@ void Vector::print(std::ostream& out) {
 }
 
 //***************************************************************************
+//Function:    size
+//
+//Description: returns the size of the vector
+//
+//Parameters:	 None
+//
+//Returned:    int - the size of the vector
+//***************************************************************************
+int Vector::size() {
+	return (int) mvElements.size();
+}
+
+//***************************************************************************
+//Function:    getElement
+//
+//Description: returns the rational at the given index
+//
+//Parameters:	 index - an integer containing the index of the desired element
+//
+//Returned:    Rational - the rational at the given index
+//***************************************************************************
+Rational& Vector::getElement(int index) {
+	return mvElements.at(index);
+}
+
+//***************************************************************************
 //Function:    simplify
 //
 //Description: Finds the first pivot in the row, and multiplies the row

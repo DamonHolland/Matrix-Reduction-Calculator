@@ -29,7 +29,7 @@ int main() {
 
 	std::cout << std::endl;
 
-	theMatrix.simplifyRows(std::cout);
+	theMatrix.reduce(std::cout);
 
 	return EXIT_SUCCESS;
 }

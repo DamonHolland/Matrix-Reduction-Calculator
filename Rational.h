@@ -10,6 +10,10 @@ public:
 	Rational getInverse();
 	void reduce();
 	Rational& operator=(const Rational& rat);
+	Rational& operator+=(const Rational& rat);
+	Rational& operator-=(const Rational& rat);
+	Rational& operator/=(const Rational& rat);
+	Rational& operator*=(const Rational& rat);
 	Rational operator+(const Rational& rat);
 	Rational operator-(const Rational& rat);
 	Rational operator/(const Rational& rat);

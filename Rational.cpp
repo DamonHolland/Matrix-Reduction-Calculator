@@ -95,6 +95,62 @@ Rational& Rational::operator=(const Rational& rat) {
 }
 
 //***************************************************************************
+//Function:    operator+=
+//
+//Description: Adds another rational to self
+//
+//Parameters:	 rat       - the other rational
+//
+//Returned:    Rational& - the new rational
+//***************************************************************************
+Rational& Rational::operator+=(const Rational& rat) {
+	*this = *this + rat;
+	return *this;
+}
+
+//***************************************************************************
+//Function:    operator-=
+//
+//Description: Subtracts another rational from self
+//
+//Parameters:	 rat       - the other rational
+//
+//Returned:    Rational& - the new rational
+//***************************************************************************
+Rational& Rational::operator-=(const Rational& rat) {
+	*this = *this - rat;
+	return *this;
+}
+
+//***************************************************************************
+//Function:    operator*=
+//
+//Description: Multiplies self by another rational
+//
+//Parameters:	 rat       - the other rational
+//
+//Returned:    Rational& - the new rational
+//***************************************************************************
+Rational& Rational::operator*=(const Rational& rat) {
+	*this = *this * rat;
+	return *this;
+}
+
+//***************************************************************************
+//Function:    operator/=
+//
+//Description: Divides self by another rational
+//
+//Parameters:	 rat       - the other rational
+//
+//Returned:    Rational& - the new rational
+//***************************************************************************
+Rational& Rational::operator/=(const Rational& rat) {
+	*this = *this / rat;
+	return *this;
+}
+
+//***************************************************************************
 //Function:    operator+
 //
 //Description: Adds Rationals
@@ -105,7 +161,7 @@ Rational& Rational::operator=(const Rational& rat) {
 //***************************************************************************
 Rational Rational::operator+(const Rational& rat) {
 	int num = mNumerator * rat.mDenominator + rat.mNumerator + mDenominator;
-	int den = mDenominator / rat.mDenominator;
+	int den = mDenominator * rat.mDenominator;
 	Rational newRat(num, den);
 	newRat.reduce();
 	return newRat;
@@ -121,8 +177,8 @@ Rational Rational::operator+(const Rational& rat) {
 //Returned:    Rational - the new rational
 //***************************************************************************
 Rational Rational::operator-(const Rational& rat) { 
-	int num = mNumerator * rat.mDenominator - rat.mNumerator + mDenominator;
-	int den = mDenominator / rat.mDenominator;
+	int num = mNumerator * rat.mDenominator - rat.mNumerator * mDenominator;
+	int den = mDenominator * rat.mDenominator;
 	Rational newRat(num, den);
 	newRat.reduce();
 	return newRat;
