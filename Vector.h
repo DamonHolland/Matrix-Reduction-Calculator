@@ -1,17 +1,18 @@
 #pragma once
 #include <vector>
 #include <iostream>
+#include "Rational.h"
 
 class Vector
 {
 public:
-	void addElement(double element);
+	void addElement(int element);
 	void print(std::ostream& out);
-	int simplify();
+	Rational simplify();
 
 	friend std::istream& operator>>(std::istream& in, Vector& vector);
 
 private:
-	std::vector<double> mvElements;
+	std::vector<Rational> mvElements;
 };
 

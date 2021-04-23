@@ -9,7 +9,7 @@ class Matrix
 		void simplifyRows(std::ostream& out);
 
 	private:
-		int simplifyRow(int row);
+		Rational simplifyRow(int row);
 		std::vector<Vector> mvVectors;
 };
 
