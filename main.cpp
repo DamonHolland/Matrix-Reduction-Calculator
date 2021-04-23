@@ -2,6 +2,15 @@
 #include "Vector.h"
 #include "Matrix.h"
 
+//***************************************************************************
+//Function:    main
+//
+//Description: Main driver for the calculator program
+//
+//Parameters:	 None
+//
+//Returned:    int -	Exit Status
+//***************************************************************************
 int main() {
 	int numRows;
 	Matrix theMatrix;

@@ -29,6 +29,19 @@ void Matrix::print(std::ostream& out) {
 }
 
 //***************************************************************************
+//Function:    print
+//
+//Description: prints the matrix to a stream
+//
+//Parameters:	 out - the ostream to print to
+//
+//Returned:    None
+//***************************************************************************
+void Matrix::reduce(std::ostream& out) { 
+
+}
+
+//***************************************************************************
 //Function:    simplifyRows
 //
 //Description: simplifies all the rows in the matrix
@@ -62,3 +75,4 @@ void Matrix::simplifyRows(std::ostream& out) {
 Rational Matrix::simplifyRow(int row) {
 	return mvVectors.at(row).simplify();
 }
+

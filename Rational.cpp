@@ -58,6 +58,12 @@ void Rational::reduce() {
 
 	mNumerator /= GCD;
 	mDenominator /= GCD;
+
+	if (mDenominator < 0) {
+		mDenominator = 0 - mDenominator;
+		mNumerator = 0 - mNumerator;
+	}
+
 }
 
 //***************************************************************************
