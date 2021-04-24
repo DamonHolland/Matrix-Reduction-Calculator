@@ -28,7 +28,7 @@ void Vector::addElement(int element){
 void Vector::print(std::ostream& out) {
 	out << "| ";
 	for (int i = 0; i < size(); i++) {
-		out << mvElements[i] << " ";
+		out << std::left << mvElements[i] << " ";
 	}
 	out << "|\n";
 }

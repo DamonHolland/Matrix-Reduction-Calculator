@@ -1,4 +1,6 @@
 #include "Rational.h"
+#include <iomanip>
+#include <string>
 
 //***************************************************************************
 //Constructor: Rational
@@ -253,8 +255,15 @@ Rational Rational::operator/(const Rational& rat) {
 //Returned:    None
 //***************************************************************************
 std::ostream& operator<<(std::ostream& os, const Rational& rat) {
-	os << rat.mNumerator;
-	if (rat.mDenominator != 1) { os << "/" << rat.mDenominator; }
+	std::string sRat = "";
+	sRat += std::to_string(rat.mNumerator);
+	if (rat.mDenominator != 1) {
+		sRat += "/";
+		sRat += std::to_string(rat.mDenominator);
+	}
+
+	os << std::setw(7) << sRat;
+	
 	return os;
 }
 
