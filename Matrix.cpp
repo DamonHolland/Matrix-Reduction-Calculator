@@ -56,11 +56,22 @@ void Matrix::reduce(std::ostream& out) {
 						subtractRow(k, pivotRow, currElement, out);
 					}
 				}
+				swapRows(numPivots, pivotRow, out);
 				numPivots++;
 				j = numRows;
 			}
 		}
 	}
+}
+
+void Matrix::swapRows(int row1, int row2, std::ostream& out) {
+	if (row1 == row2) { return; }
+	Vector temp = mvVectors[row1];
+	mvVectors[row1] = mvVectors[row2];
+	mvVectors[row2] = temp;
+	out << std::endl << "R" << row1 + 1 << " <-> " << "R" << row2 + 1 << std::endl;
+	print(out);
+	out << std::endl << std::endl;
 }
 
 //***************************************************************************
