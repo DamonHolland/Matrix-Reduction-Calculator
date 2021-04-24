@@ -26,11 +26,11 @@ void Vector::addElement(int element){
 //Returned:    None
 //***************************************************************************
 void Vector::print(std::ostream& out) {
-	out << "[ ";
-	for (int i = 0; i < (int)mvElements.size(); i++) {
+	out << "| ";
+	for (int i = 0; i < size(); i++) {
 		out << mvElements[i] << " ";
 	}
-	out << "]\n";
+	out << "|\n";
 }
 
 //***************************************************************************
@@ -56,7 +56,7 @@ int Vector::size() {
 //Returned:    Rational - the rational at the given index
 //***************************************************************************
 Rational& Vector::getElement(int index) {
-	return mvElements.at(index);
+	return mvElements[index];
 }
 
 //***************************************************************************
@@ -70,20 +70,15 @@ Rational& Vector::getElement(int index) {
 //Returned:    Rational - the rational multiplied by
 //***************************************************************************
 Rational Vector::simplify() {
-	Rational cInverse(0, 0);
-	int pivotIndex = -1;
+	Rational cInverse;
 
-	for (int i = 0; i < (int) mvElements.size(); i++) {
-		if (mvElements.at(i).getNum() != 0) {
-			pivotIndex = i;
+	for (int i = 0; i < size(); i++) {
+		if (!mvElements.at(i).isZero()) {
 			cInverse = mvElements.at(i).getInverse();
+			for (int j = i; j < size(); j++) {
+				mvElements.at(j) *= cInverse;
+			}
 			i = mvElements.size();
-		}
-	}
-
-	if (pivotIndex != -1){
-		for (int i = pivotIndex; i < (int)mvElements.size(); i++) {
-			mvElements.at(i) *= cInverse;
 		}
 	}
 

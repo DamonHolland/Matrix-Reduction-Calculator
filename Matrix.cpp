@@ -23,7 +23,7 @@ void Matrix::addVector(Vector vector) {
 //Returned:    None
 //***************************************************************************
 void Matrix::print(std::ostream& out) {
-	for (int i = 0; i < (int) mvVectors.size(); i++) {
+	for (int i = 0; i < numRows(); i++) {
 		mvVectors.at(i).print(out);
 	}
 }
@@ -38,19 +38,18 @@ void Matrix::print(std::ostream& out) {
 //Returned:    None
 //***************************************************************************
 void Matrix::reduce(std::ostream& out) { 
-	int numCols = mvVectors[0].size(), numRows = mvVectors.size();
 	int pivotRow, numPivots = 0;
-	Rational currElement(0, 0), pivotElement(0, 0);
+	Rational currElement, pivotElement;
 
 	print(out);
 
-	for (int i = 0; i < numCols; i++) {
-		for (int j = numPivots; j < numRows; j++) {
+	for (int i = 0; i < numCols(); i++) {
+		for (int j = numPivots; j < numRows(); j++) {
 			pivotElement = mvVectors[j].getElement(i);
 			if (!pivotElement.isZero()) {
 				pivotRow = j;
 				simplifyRow(pivotRow, out);
-				for (int k = 0; k < numRows; k++) {
+				for (int k = 0; k < numRows(); k++) {
 					currElement = mvVectors[k].getElement(i);
 					if (k != pivotRow && !currElement.isZero()) {
 						subtractRow(k, pivotRow, currElement, out);
@@ -58,20 +57,56 @@ void Matrix::reduce(std::ostream& out) {
 				}
 				swapRows(numPivots, pivotRow, out);
 				numPivots++;
-				j = numRows;
+				j = numRows();
 			}
 		}
 	}
 }
 
+//***************************************************************************
+//Function:    numRows
+//
+//Description: Returns the number of rows in the matrix
+//
+//Parameters:	 None
+//
+//Returned:    int - an integer containing the number of rows
+//***************************************************************************
+int Matrix::numRows() {
+	return (int) mvVectors.size();
+}
+
+//***************************************************************************
+//Function:    numCols
+//
+//Description: Returns the number of columns in the matrix
+//
+//Parameters:	 None
+//
+//Returned:    int - an integer containing the number of columns
+//***************************************************************************
+int Matrix::numCols() {
+	return (int)mvVectors[0].size();
+}
+
+//***************************************************************************
+//Function:    swapRows
+//
+//Description: swaps two rows in the matrix
+//
+//Parameters:	 row1  - the index of the first vector to swap
+//						 row2  - the index of the second vector to swap
+//						 out   - the ostream to print the operation to
+//
+//Returned:    None
+//***************************************************************************
 void Matrix::swapRows(int row1, int row2, std::ostream& out) {
 	if (row1 == row2) { return; }
 	Vector temp = mvVectors[row1];
 	mvVectors[row1] = mvVectors[row2];
 	mvVectors[row2] = temp;
-	out << std::endl << "R" << row1 + 1 << " <-> " << "R" << row2 + 1 << std::endl;
+	out << "\nR" << row1 + 1 << " <-> " << "R" << row2 + 1 << "\n\n";
 	print(out);
-	out << std::endl << std::endl;
 }
 
 //***************************************************************************
@@ -88,11 +123,11 @@ void Matrix::swapRows(int row1, int row2, std::ostream& out) {
 //***************************************************************************
 void Matrix::subtractRow(int rRow, int pRow, Rational rat,
 												 std::ostream& out) {
-	for (int i = 0; i < mvVectors.at(rRow).size(); i++) {
-		mvVectors.at(rRow).getElement(i) -= rat * mvVectors.at(pRow).getElement(i);
+	for (int i = 0; i < numCols(); i++) {
+		mvVectors[rRow].getElement(i) -= rat * mvVectors[pRow].getElement(i);
 	}
-	out << std::endl << "R" << rRow + 1 << " = " << "R" << rRow + 1
-			<< " - " << rat << "R" << pRow + 1 << std::endl << std::endl;
+	out << "\nR" << rRow + 1 << " = " << "R" << rRow + 1
+			<< " - " << rat << "R" << pRow + 1 << "\n\n";
 	print(out);
 }
 
@@ -107,13 +142,10 @@ void Matrix::subtractRow(int rRow, int pRow, Rational rat,
 //Returned:    Rational - the rational used as a row operation
 //***************************************************************************
 void Matrix::simplifyRow(int row, std::ostream& out) {
-	Rational inverse(0, 0);
-	inverse = mvVectors.at(row).simplify();
+	Rational inverse = mvVectors.at(row).simplify();
 	if (inverse.getNum() != inverse.getDen()) {
-		out << std::endl << "R" << row + 1 << " = " << inverse << "R" << row + 1;
-		out << std::endl;
+		out << "\nR" << row + 1 << " = " << inverse << "R" << row + 1 << "\n\n";
 		print(out);
-		out << std::endl << std::endl;
 	}
 }
 

@@ -3,6 +3,21 @@
 //***************************************************************************
 //Constructor: Rational
 //
+//Description: Default Constructor for rational. Initializes numerator to 0
+//						 and denominator to 1
+//
+//Parameters:	 None
+//
+//Returned:    None
+//***************************************************************************
+Rational::Rational() {
+	mNumerator = 0;
+	mDenominator = 1;
+}
+
+//***************************************************************************
+//Constructor: Rational
+//
 //Description: Creates a rational with the given numerator and denominator
 //
 //Parameters:	 num - the int numerator
@@ -47,15 +62,14 @@ int Rational::getDen() { return mDenominator; }
 //Returned:    None
 //***************************************************************************
 void Rational::reduce() {
-	int i = 1, GCD = 1;
+	int GCD = 1;
+	int max = (abs(mNumerator) > abs(mDenominator)) ? abs(mNumerator)
+																									: abs(mDenominator);
 
-	while (i <= abs(mNumerator) || i <= abs(mDenominator)){
-		if (mNumerator % i == 0 && mDenominator % i == 0) {
-			GCD = i;
-		}
-		i++;
+	for (int i = 1; i <= max; i++) {
+		if (mNumerator % i == 0 && mDenominator % i == 0) { GCD = i; }
 	}
-
+		
 	mNumerator /= GCD;
 	mDenominator /= GCD;
 
@@ -63,7 +77,6 @@ void Rational::reduce() {
 		mDenominator = 0 - mDenominator;
 		mNumerator = 0 - mNumerator;
 	}
-
 }
 
 //***************************************************************************

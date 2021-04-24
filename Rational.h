@@ -4,6 +4,7 @@
 class Rational
 {
 public:
+	Rational();
 	Rational(int, int);
 	int getNum();
 	int getDen();
