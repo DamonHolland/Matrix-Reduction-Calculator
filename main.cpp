@@ -12,24 +12,36 @@
 //Returned:    int -	Exit Status
 //***************************************************************************
 int main() {
+	const std::string CONTINUE = "Y";
 	int numRows;
-	Matrix theMatrix;
+	std::string selection = CONTINUE;
 
-	std::cout << "Enter the number of rows: ";
-	std::cin >> numRows;
-	std::cout << std::endl;
-	std::cin.ignore();
+	while (selection == CONTINUE) {
+		Matrix theMatrix;
 
-	for (int i = 0; i < numRows; i++) {
-		Vector newVector;
-		std::cout << "Enter row " << i + 1 << ": ";
-		std::cin >> newVector;
-		theMatrix.addVector(newVector);
+		system("cls");
+		std::cout << "******************************\n";
+		std::cout << "Reduced Row Echelon Calculator\n";
+		std::cout << "******************************\n\n";
+
+		std::cout << "Enter the number of rows: ";
+		std::cin >> numRows;
+		std::cout << std::endl;
+		std::cin.ignore();
+
+		for (int i = 0; i < numRows; i++) {
+			Vector newVector;
+			std::cout << "Enter row " << i + 1 << ": ";
+			std::cin >> newVector;
+			theMatrix.addVector(newVector);
+		}
+
+		std::cout << std::endl;
+		theMatrix.reduce(std::cout);
+
+		std::cout << "\n\nAnother? (Y/N): ";
+		std::cin >> selection;
 	}
-
-	std::cout << std::endl;
-
-	theMatrix.reduce(std::cout);
 
 	return EXIT_SUCCESS;
 }

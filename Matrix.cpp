@@ -10,11 +10,9 @@
 //Returned:    None
 //***************************************************************************
 void Matrix::addVector(Vector vector) {
-	if (numRows() > 0) {
-		if (vector.size() != numCols()) {
-			std::cout << "\nInvalid vector, number of columns does not match.\n";
-			exit(EXIT_FAILURE);
-		}
+	if (numRows() > 0 && vector.size() != numCols()) {
+		std::cout << "\nInvalid vector, number of columns does not match.\n";
+		exit(EXIT_FAILURE);
 	}
 	else {
 		mvVectors.push_back(vector);
