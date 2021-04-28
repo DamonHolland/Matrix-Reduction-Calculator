@@ -8,6 +8,7 @@ public:
 	Rational(int, int);
 	int getNum();
 	int getDen();
+	int digitWidth();
 	Rational getInverse();
 	void reduce();
 	bool isZero();

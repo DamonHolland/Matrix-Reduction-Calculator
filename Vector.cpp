@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <sstream>
+#include <iomanip>
 
 //***************************************************************************
 //Function:    addElement
@@ -25,10 +26,10 @@ void Vector::addElement(int element){
 //
 //Returned:    None
 //***************************************************************************
-void Vector::print(std::ostream& out) {
+void Vector::print(std::ostream& out, std::vector<int> vWidths) {
 	out << "| ";
 	for (int i = 0; i < size(); i++) {
-		out << std::left << mvElements[i] << " ";
+		out << std::left << std::setw(vWidths[i]) << mvElements[i] << " ";
 	}
 	out << "|\n";
 }

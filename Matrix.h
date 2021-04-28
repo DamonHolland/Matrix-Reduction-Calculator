@@ -14,6 +14,7 @@ class Matrix
 		void subtractRow(int rRow, int pRow, Rational inv, std::ostream& out);
 		int numRows();
 		int numCols();
+		std::vector<int> getColWidths();
 		std::vector<Vector> mvVectors;
 };
 

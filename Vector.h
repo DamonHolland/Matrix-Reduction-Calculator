@@ -7,7 +7,7 @@ class Vector
 {
 public:
 	void addElement(int element);
-	void print(std::ostream& out);
+	void print(std::ostream& out, std::vector<int> vWidths);
 	int size();
 	Rational& getElement(int index);
 	Rational simplify();

@@ -29,8 +29,9 @@ void Matrix::addVector(Vector vector) {
 //Returned:    None
 //***************************************************************************
 void Matrix::print(std::ostream& out) {
+	std::vector<int> vColWidths = getColWidths();
 	for (int i = 0; i < numRows(); i++) {
-		mvVectors.at(i).print(out);
+		mvVectors.at(i).print(out, vColWidths);
 	}
 }
 
@@ -155,3 +156,28 @@ void Matrix::simplifyRow(int row, std::ostream& out) {
 	}
 }
 
+//***************************************************************************
+//Function:    getColWidths
+//
+//Description: returns a vector containing the max digit length in each
+//						 column. Helps to get widths for printing
+//
+//Parameters:	 None
+//
+//Returned:    vector<int> - a vector containing the max digit lengths
+//***************************************************************************
+std::vector<int> Matrix::getColWidths() {
+	std::vector<int> vcolWidths;
+
+	for (int i = 0; i < numCols(); i++) {
+		int max = 0;
+		for (int j = 0; j < numRows(); j++) {
+			if (mvVectors[j].getElement(i).digitWidth() > max) {
+				max = mvVectors[j].getElement(i).digitWidth();
+			}
+		}
+		vcolWidths.push_back(max);
+	}
+
+	return vcolWidths;
+}

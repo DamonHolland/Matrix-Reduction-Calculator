@@ -1,5 +1,4 @@
 #include "Rational.h"
-#include <iomanip>
 #include <string>
 
 //***************************************************************************
@@ -53,6 +52,39 @@ int Rational::getNum() { return mNumerator; }
 //Returned:    int - the denominator
 //***************************************************************************
 int Rational::getDen() { return mDenominator; }
+
+//***************************************************************************
+//Function:    digitWidth
+//
+//Description: Returns the number of digits used when printing
+//
+//Parameters:	 None
+//
+//Returned:    int - the number of digits used when printing
+//***************************************************************************
+int Rational::digitWidth()
+{
+	const int SINGLE_DIGIT = 1, SLASH_LENGTH = 1, HIDDEN_DEN = 1, BASE = 10;
+	int num = abs(mNumerator), den = mDenominator;
+	int numWidth = SINGLE_DIGIT, denWidth = SINGLE_DIGIT;
+	int totalWidth = mNumerator < 0 ? 1 : 0;
+
+	while (num != 0) {
+		num /= BASE;
+		numWidth++;
+	}
+
+	totalWidth += numWidth;
+
+	if (mDenominator != HIDDEN_DEN) {
+		while (den != 0) {
+			den /= BASE;
+			denWidth++;
+		}
+		totalWidth += denWidth + SLASH_LENGTH;
+	}
+	return totalWidth;
+}
 
 //***************************************************************************
 //Function:    reduce
@@ -262,7 +294,7 @@ std::ostream& operator<<(std::ostream& os, const Rational& rat) {
 		sRat += std::to_string(rat.mDenominator);
 	}
 
-	os << std::setw(7) << sRat;
+	os << sRat;
 	
 	return os;
 }
