@@ -64,9 +64,9 @@ int Rational::getDen() { return mDenominator; }
 //***************************************************************************
 int Rational::digitWidth()
 {
-	const int SINGLE_DIGIT = 1, SLASH_LENGTH = 1, HIDDEN_DEN = 1, BASE = 10;
+	const int SLASH_LENGTH = 1, HIDDEN_DEN = 1, BASE = 10;
 	int num = abs(mNumerator), den = mDenominator;
-	int numWidth = SINGLE_DIGIT, denWidth = SINGLE_DIGIT;
+	int numWidth = 0, denWidth = 0;
 	int totalWidth = mNumerator < 0 ? 1 : 0;
 
 	while (num != 0) {
@@ -96,17 +96,20 @@ int Rational::digitWidth()
 //Returned:    None
 //***************************************************************************
 void Rational::reduce() {
-	int GCD = 1;
 	int max = (abs(mNumerator) > abs(mDenominator)) ? abs(mNumerator)
 																									: abs(mDenominator);
 
-	for (int i = 1; i <= max; i++) {
-		if (mNumerator % i == 0 && mDenominator % i == 0) { GCD = i; }
+	for (int i = 2; i <= max; i++) {
+		if (mNumerator % i == 0 && mDenominator % i == 0)
+		{
+			mNumerator /= i;
+			mDenominator /= i;
+			i = 1;
+			max = (abs(mNumerator) > abs(mDenominator)) ? abs(mNumerator)
+																									: abs(mDenominator);
+		}
 	}
 		
-	mNumerator /= GCD;
-	mDenominator /= GCD;
-
 	if (mDenominator < 0) {
 		mDenominator = 0 - mDenominator;
 		mNumerator = 0 - mNumerator;

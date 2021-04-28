@@ -27,9 +27,9 @@ void Vector::addElement(int element){
 //Returned:    None
 //***************************************************************************
 void Vector::print(std::ostream& out, std::vector<int> vWidths) {
-	out << "| ";
+	out << "|  ";
 	for (int i = 0; i < size(); i++) {
-		out << std::left << std::setw(vWidths[i]) << mvElements[i] << " ";
+		out << std::left << std::setw(vWidths[i] + 2) << mvElements[i];
 	}
 	out << "|\n";
 }

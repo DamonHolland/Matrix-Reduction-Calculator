@@ -12,6 +12,9 @@
 //Returned:    int -	Exit Status
 //***************************************************************************
 int main() {
+
+	// NEED TO SPEED UP REDUCE FUNCTION
+
 	const std::string CONTINUE = "Y";
 	int numRows;
 	std::string selection = CONTINUE;
