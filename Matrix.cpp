@@ -45,25 +45,17 @@ void Matrix::print(std::ostream& out) {
 //Returned:    None
 //***************************************************************************
 void Matrix::reduce(std::ostream& out) { 
-	int pivotRow, numPivots = 0;
-	Rational currElement, pivotElement;
-
+	int numPivots = 0;
 	print(out);
-
 	for (int i = 0; i < numCols(); i++) {
 		for (int j = numPivots; j < numRows(); j++) {
-			pivotElement = mvVectors[j].getElement(i);
-			if (!pivotElement.isZero()) {
-				pivotRow = j;
-				simplifyRow(pivotRow, out);
+			if (!mvVectors[j].getElement(i).isZero()) {
+				simplifyRow(j, out);
 				for (int k = 0; k < numRows(); k++) {
-					currElement = mvVectors[k].getElement(i);
-					if (k != pivotRow && !currElement.isZero()) {
-						subtractRow(k, pivotRow, currElement, out);
-					}
+					if (k != j && !mvVectors[k].getElement(i).isZero())
+						subtractRow(k, j, mvVectors[k].getElement(i), out);
 				}
-				swapRows(numPivots, pivotRow, out);
-				numPivots++;
+				swapRows(numPivots++, j, out);
 				j = numRows();
 			}
 		}
